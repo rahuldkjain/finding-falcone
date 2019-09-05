@@ -1,90 +1,41 @@
 <template>
   <v-container>
-    <v-layout
-      text-center
-      wrap
-    >
+    <v-layout text-center wrap>
       <v-flex xs12>
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        ></v-img>
+        <v-img :src="require('../assets/falcone.png')" class="my-3"
+          contain height="200">
+        </v-img>
       </v-flex>
 
       <v-flex mb-4>
         <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
+          Finding Falcone
         </h1>
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank">Discord Community</a>
-        </p>
       </v-flex>
 
-      <v-flex
-        mb-5
-        xs12
-      >
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
+      <v-flex mb-5 xs12>
+        <h2 class="headline font-weight-bold mb-3">Highness, please select 4 planets and vehicles to send army to find Falcone</h2>
 
         <v-layout justify-center>
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
+        </v-layout>
+      </v-flex>
+
+      <v-flex mb-5 xs12 class="footer">
+        <v-layout justify-center>
+          Coding Problem- <a href="www.geektrust.in/finding-falcone"
+             class="mx-3 footerLink" target="_blank">
+            www.geektrust.in/finding-falcone
           </a>
         </v-layout>
       </v-flex>
 
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Important Links</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        xs12
-        mb-5
-      >
-        <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
-
-        <v-layout justify-center>
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-layout>
-      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+  import Vue from 'vue'
+  import {mapGetters} from 'vuex'
 export default {
   data: () => ({
     ecosystem: [
@@ -137,6 +88,52 @@ export default {
         href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
       },
     ],
+    payload: {
+      "token": "ewPSvFVdgBeiQljMhpBoMeUTxnVkpkNP",
+      "planet_names": [
+        "Donlon",
+        "Enchai",
+        "Sapir",
+        "Pingasor"
+      ],
+      "vehicle_names": [
+        "Space pod",
+        "Space rocket",
+        "Space rocket",
+        "Space rocket"
+      ]
+    }
   }),
+  watch: {
+    getPlanets: function (newValue) {
+      console.log(newValue)
+    },
+    getVehicles: function (newValue) {
+      console.log(newValue)
+    },
+    getFindFalcone: function (newValue) {
+      console.log(newValue)
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchPlanets')
+    this.$store.dispatch('fetchVehicles')
+    this.$store.dispatch('fetchFindFalcone', this.payload)
+  },
+  computed: {
+    ...mapGetters(['getPlanets', 'getVehicles', 'getFindFalcone'])
+  }
 };
 </script>
+
+<style>
+  .footer {
+    position: fixed;
+    left: 35%;
+    bottom: 0;
+  }
+  .footerLink {
+    color: #333 !important;
+    text-decoration: none !important;
+  }
+</style>
