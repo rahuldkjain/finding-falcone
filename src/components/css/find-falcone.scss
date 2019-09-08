@@ -1,0 +1,90 @@
+.footer {
+  position: fixed;
+  left: 35%;
+  bottom: 0;
+}
+.footerLink {
+  color: #333 !important;
+  text-decoration: none !important;
+}
+.container {
+  margin: 2%;
+}
+.configureArmyArea {
+  display: grid;
+  grid-template-columns: 30% 65.9%;
+  width: 100%;
+  grid-gap: 2%;
+  margin: 2%;
+}
+.progressBar {
+  float: right !important;
+}
+.planetDropdown {
+  width: 90%;
+}
+.selectArea {
+  padding: 1%;
+  background: #f3f3f3;
+  border-radius: 4px;
+  margin-right: 6%;
+}
+.active {
+  background: #333;
+}
+.attackButton {
+  font-size: 24px;
+  padding: 1%;
+  background: #ffffff;
+  border-radius: 4px;
+  width: 35%;
+  box-shadow: 0px 0px 5px 0px rgba(1,12,20,1);
+  display: grid;
+  grid-template-columns: 40% 60%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40%;
+  img {
+    width: 50%;
+    float: right;
+  }
+  .attackButtonText {
+    float: right !important;
+    padding-left: 4%;
+    padding-top: 1%;
+  }
+}
+.enableButton {
+  color: #fff;
+  background-color: #010c14 !important;
+}
+
+.disableAttackButton {
+  font-size: 24px;
+  padding: 1%;
+  background: #ffffff;
+  border-radius: 4px;
+  width: 35%;
+  text-align: center;
+  box-shadow: 0px 0px 5px 0px rgba(234,239,243,1);
+  margin-left: 40%;
+}
+.sidebar {
+  border: 1px solid #fff;
+}
+.sidebarMenu {
+  text-align: center;
+  padding: 3% 15%;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.active {
+  background: #F3F3F3;
+  border-left: 2px solid #333333;
+}
+.filled {
+  background: url(https://image.flaticon.com/icons/svg/190/190411.svg) no-repeat 94%;
+  background-size: 10%;
+}

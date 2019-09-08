@@ -1,13 +1,13 @@
 <template>
-  <HelloWorld />
+  <FindFalcone />
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
+import FindFalcone from '../components/FindFalcone';
 
 export default {
   components: {
-    HelloWorld,
+    FindFalcone,
   },
 };
 </script>

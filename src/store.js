@@ -8,17 +8,21 @@ export default new Vuex.Store({
   state: {
     planets: [],
     vehicles: [],
-    findFalcone: {}
+    findFalcone: {},
+    token: ''
   },
   mutations: {
     setPlanets (state, value) {
-      state.planets = value.data
+      state.planets = JSON.parse(JSON.stringify(value.data))
     },
     setVehicles (state, value) {
-      state.vehicles = value.data
+      state.vehicles = JSON.parse(JSON.stringify(value.data))
     },
     setFindFalcone (state, value) {
       state.findFalcone = value.data
+    },
+    setToken (state, value) {
+      state.token = value.data
     }
   },
   actions: {
@@ -30,6 +34,11 @@ export default new Vuex.Store({
     fetchVehicles: (context) => {
       findFalconeApis.fetchVehicles((result) => {
         context.commit('setVehicles', result)
+      })
+    },
+    fetchToken: (context) => {
+      findFalconeApis.fetchToken((result) => {
+        context.commit('setToken', result)
       })
     },
     fetchFindFalcone: (context, payload) => {
@@ -44,6 +53,9 @@ export default new Vuex.Store({
     },
     getVehicles: (state) => {
       return state.vehicles
+    },
+    getToken: (state) => {
+      return state.token
     },
     getFindFalcone: (state) => {
       return state.findFalcone
