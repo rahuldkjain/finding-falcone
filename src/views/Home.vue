@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import FindFalcone from '../components/FindFalcone';
+import FindFalcone from '../components/FindFalcone'
 
 export default {
   components: {
-    FindFalcone,
-  },
-};
+    FindFalcone
+  }
+}
 </script>

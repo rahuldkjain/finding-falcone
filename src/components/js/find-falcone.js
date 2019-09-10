@@ -1,6 +1,12 @@
 import { mapGetters } from 'vuex'
 export default {
   data: () => ({
+    loadResult: false,
+    findFalcone: {},
+    displayResults: false,
+    timeTaken: 0,
+    loadPlanets: true,
+    loadVehicles: true,
     currentArmyNumber: 1,
     armiesPrepared: [],
     progress: 0,
@@ -15,7 +21,7 @@ export default {
     availablePlanets: [],
     availableVehicles: [],
     payload: {
-      'token': 'ewPSvFVdgBeiQljMhpBoMeUTxnVkpkNP',
+      'token': '',
       'planet_names': [],
       'vehicle_names': []
     }
@@ -25,12 +31,17 @@ export default {
       newValue.forEach(planet => {
         this.availablePlanets.push({ name: planet.name, disabled: false })
       })
+      this.loadPlanets = false
     },
     getVehicles: function (newValue) {
       this.availableVehicles = newValue
+      this.loadVehicles = false
     },
     getFindFalcone: function (newValue) {
       console.log(newValue)
+      this.findFalcone = newValue
+      this.displayResults = true
+      this.loadResult = false
     },
     getToken: function (newValue) {
       this.payload.token = newValue.token
@@ -45,9 +56,12 @@ export default {
     this.$store.dispatch('fetchToken')
   },
   computed: {
-    ...mapGetters(['getPlanets', 'getVehicles', 'getFindFalcone', 'getToken']),
+    ...mapGetters(['getPlanets', 'getVehicles', 'getFindFalcone', 'getToken', 'getFindFalcone']),
     enableAttack () {
       return this.progress === 100
+    },
+    loading () {
+      return this.loadPlanets || this.loadVehicles
     }
   },
   methods: {
@@ -77,6 +91,7 @@ export default {
             for (var index = 0; index < this.availableVehicles.length; index++) {
               if (this.availableVehicles[index].name === this.chosenArmies[this.currentArmyNumber].vehicle) {
                 this.availableVehicles[index].total_no += 1
+                this.timeTaken -= this.availableVehicles[index]['max_distance'] / this.availableVehicles[index]['speed']
               }
             }
 
@@ -87,6 +102,7 @@ export default {
             for (var index = 0; index < this.availableVehicles.length; index++) {
               if (this.availableVehicles[index].name === this.chosenVehicle) {
                 this.availableVehicles[index].total_no -= 1
+                this.timeTaken += this.availableVehicles[index]['max_distance'] / this.availableVehicles[index]['speed']
               }
             }
           }
@@ -106,6 +122,7 @@ export default {
           for (var index = 0; index < this.availableVehicles.length; index++) {
             if (this.availableVehicles[index].name === this.chosenVehicle) {
               this.availableVehicles[index].total_no -= 1
+              this.timeTaken += this.availableVehicles[index]['max_distance'] / this.availableVehicles[index]['speed']
             }
           }
           this.armiesPrepared.push(this.currentArmyNumber)
@@ -123,7 +140,38 @@ export default {
         this.payload.planet_names.push(this.chosenArmies[index].planet)
         this.payload.vehicle_names.push(this.chosenArmies[index].vehicle)
       }
+      this.loadResult = true
+      this.displayResults = true
       this.$store.dispatch('fetchFindFalcone', this.payload)
+    },
+    reset () {
+      this.displayResults = false
+      this.findFalcone = {}
+      this.timeTaken = 0
+      this.loadPlanets = true
+      this.loadVehicles = true
+      this.currentArmyNumber = 1
+      this.armiesPrepared = []
+      this.progress = 0
+      this.chosenArmies = {
+        1: {},
+        2: {},
+        3: {},
+        4: {}
+      }
+      this.loadResult = false
+      this.chosenPlanet = ''
+      this.chosenVehicle = ''
+      this.availablePlanets = []
+      this.availableVehicles = []
+      this.payload = {
+        'token': '',
+        'planet_names': [],
+        'vehicle_names': []
+      }
+      this.$store.dispatch('fetchPlanets')
+      this.$store.dispatch('fetchVehicles')
+      this.$store.dispatch('fetchToken')
     }
   }
 }
