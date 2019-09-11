@@ -7,7 +7,7 @@
       <v-spacer></v-spacer>
       <v-btn
         text
-        href="#"
+        @click="reloadPage"
       >
         <span class="mr-2">Reset</span>
       </v-btn>
@@ -34,9 +34,11 @@ export default {
   components: {
     FindFalcone
   },
-  data: () => ({
-    //
-  })
+  methods: {
+    reloadPage () {
+      window.location.reload()
+    }
+  }
 }
 </script>
 
