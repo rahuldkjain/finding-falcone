@@ -1,4 +1,4 @@
-# finding-falcone
+# Finding Falcone
 
 ## Project setup
 ```
