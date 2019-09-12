@@ -30,5 +30,5 @@ npm run lint
 npm run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Designed & Developed with :sparkling_heart: by
+* [Rahul Jain](https://rahuldkjain.github.io)
